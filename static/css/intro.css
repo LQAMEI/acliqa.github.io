@@ -1,0 +1,141 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.8;
+    min-height: 100vh;
+    padding: 40px 20px;
+}
+
+/* .container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: white;
+    padding: 50px;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 0.6s ease-out;
+} */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+h1 {
+    color: #2c3e50;
+    font-size: 32px;
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 4px solid #667eea;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+p {
+    text-align: justify;
+    margin-bottom: 30px;
+    font-size: 17px;
+    color: #34495e;
+    line-height: 2;
+    position: relative;
+    transition: all 0.3s ease;
+    padding-left: 20px;
+}
+
+p:hover {
+    background-color: #f8f9fa;
+    padding-left: 25px;
+}
+
+b {
+    color: #667eea;
+    font-weight: 600;
+}
+
+i, em {
+    font-style: italic;
+    color: #764ba2;
+}
+
+.question {
+    background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+    padding: 25px 30px;
+    border-radius: 12px;
+    margin: 30px 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #2c3e50;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.1);
+    transition: all 0.3s ease;
+}
+
+.question:hover {
+    transform: translateX(5px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.2);
+}
+
+.highlight {
+    background: linear-gradient(120deg, #ffd89b 0%, #19547b 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+}
+
+.section-intro::before {
+    content: "Background.";
+    /* display: block; */
+    font-size: 14px;
+    color: #764ba2;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+}
+
+.section-approach::before {
+    content: "Our Approach.";
+    /* display: block; */
+    font-size: 14px;
+    color: #764ba2;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+}
+
+.section-frame::before {
+    content: "Overview of the Proposed Adversarial and Collaborative  Learning based IQA model (ACL-IQA) Framework.";
+    /* display: block; */
+    font-size: 14px;
+    color: #764ba2;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 30px 20px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    p {
+        font-size: 16px;
+    }
+}

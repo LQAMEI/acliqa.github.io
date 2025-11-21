@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+    content="Bridging Adversarial and Collaborative Learning for AI-Generated Image Quality Assessment">
+  <meta name="keywords" content="AI-generated image quality assessment, Adversarial and collaborative learning, 
+Mixture-of-Experts.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bridging Adversarial and Collaborative Learning for AI-Generated Image Quality Assessment</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/intro.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+ 
+
+  <!-- <link rel="icon" href="./static/images/favicon.svg"> -->
+
+  <!-- 原有 CSS 引用不变 -->
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <!-- 添加以下自定义 CSS，解决间距过大问题 -->
+  <style>
+    /* 减小 section 标签的上下内边距（默认 3rem 改为 1.5rem） */
+    .section {
+      padding-top: 1.5rem !important;
+      padding-bottom: 1.5rem !important;
+    }
+
+    /* 减小 .content 类的上下外边距，消除段前多余间距 */
+    .content {
+      margin-top: 0.5rem !important;
+      margin-bottom: 0.5rem !important;
+    }
+
+    /* 消除图片与上方文字的默认空白间距，同时控制图片上下间距 */
+    .content img {
+      margin-top: 0.8rem !important;
+      margin-bottom: 0.8rem !important;
+      display: block; /* 消除 inline-block 带来的额外空白 */
+      margin-left: auto; /* 保持图片水平居中（如果需要） */
+      margin-right: auto;
+    }
+
+    /* 减小标题与下方内容的间距 */
+    .title.is-3 {
+      margin-bottom: 1rem !important;
+    }
+  </style>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+  <script src="./static/js/script.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <!-- <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script> -->
+</head>
+
+<body>
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title"><span style="color: #228be6;font-weight: bolder;"></span>Bridging Adversarial and Collaborative Learning for AI-Generated Image Quality Assessment</h1>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <a href="">Baoliang Chen</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a href="">Qing Lin</a><sup>2</sup>,</span> 
+              <!-- <span class="author-block">
+                  <a href="https://scholar.google.com/citations?hl=zh-CN&user=pLHqgLIAAAAJ">Sijie Mai</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a href="https://dblp.org/pid/214/8898.html">Hanwei Zhu</a><sup>2</sup>,</span>
+              <span class="author-block">
+                <a href="https://github.com/lingyzhu0101">Lingyu Zhu</a><sup>3</sup>,</span>
+              <span class="author-block">
+                <a href="https://openreview.net/profile?id=~Yuncheng_Jiang1">Yuncheng Jiang</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?hl=zh-CN&user=w_WL27oAAAAJ">Baoliang Chen</a><sup>1</sup><sup>*</sup>,</span>
+              <span class="author-block"> -->
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup>1</sup>South China Normal University, China</span>
+              <span class="author-block"><sup>2</sup>Hong Kong University of Science and Technology (Guangzhou), China</span>
+              <!-- <span class="author-block"><sup>3</sup>City University of Hong Kong, China</span><br>
+              <span class="author-block"><sup>*</sup>denotes Corresponding author</span> -->
+            </div>
+            <!-- TODO: update paper and video link once upload -->
+            <div class="column has-text-centered">
+              <!-- <div class="publication-links"> -->
+                <!-- PDF Link. -->
+                <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+                </span>
+                <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+                <!-- Video Link. -->
+                <!-- <span class="link-block">
+                  <a href="https://youtu.be/470hul75bSM" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                    </span>
+                    <span>Video</span>
+                  </a>
+                </span> -->
+                <!-- Code Link. -->
+                <span class="link-block">
+                  <a href="https://github.com/LQAMEI/ACL-IQA"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Overview</h2>
+          <div class="content has-text-justified">
+            <img src="./static/images/intro.jpg">
+            
+
+            <p class="section-intro">
+            Over the past decades, numerous IQA models have been developed to handle common degradations like noise or blur. 
+            However, these methods are inherently limited when confronted with the unique distortions introduced by modern generative models, 
+            distortions that are semantic rather than photometric. Moreover, since they typically ignore textual information, 
+            they cannot properly evaluate prompt alignment. To address these limitations, a new wave of AIGIQA-specific methods has emerged, 
+            such as TIER and IPCE, which leverage dual encoders and CLIP to capture image-text alignment. 
+            Yet, despite these promising efforts, one crucial aspect remains underexplored: the intrinsic interaction between perceptual 
+            and alignment quality. Existing approaches usually treat them as independent tasks, overlooking the subtle ways in which 
+            they influence each other during human judgment. As illustrated in Fig. 1, this interaction can be either <i>collaborative</i> 
+            or <i>adversarial</i>. In some cases (Fig. 1(a)-(b)), prompts containing quality-related words cause the two assessments to 
+            reinforce each other, where high-quality visuals tend to be perceived as better aligned, and vice versa. In other cases 
+            (Fig. 1(c)-(d)), the two aspects behave independently or even conflict, suggesting that they should be disentangled.
+        </p>
+
+        <div class="question">
+            How should we estimate the two types of quality in AIGIs—adversarially, collaboratively, or both?
+        </div>
+        
+        <p class="section-approach">
+            Motivated by this, we argue that an effective AIGIQA model must explicitly account for these dual modes of behavior rather 
+            than treating them as incidental properties. In this work, we introduce a novel <b>Dual-Gated Mixture-of-Experts (DG-MoE)</b> 
+            framework that models perception-alignment interactions through two complementary learning paths. The <b>collaborative path</b> 
+            captures mutually reinforcing cues between perceptual and semantic signals to produce joint predictions, while the 
+            <b>adversarial path</b> employs a disentangling objective to expose conflicts that may bias quality estimation. DG-MoE 
+            operationalizes this idea by using prompt-guided gating functions to selectively route visual features to expert networks 
+            specialized for either collaborative reasoning or adversarial disentanglement. By synthesizing the outcomes of both paths, 
+            the framework captures a richer set of interaction patterns and produces a more holistic quality estimate. Extensive experiments 
+            on multiple AIGIQA benchmarks demonstrate the superiority of our approach and reveal strong complementarity between the two 
+            learning paths.
+        </p>
+
+
+
+          </div>
+        </div>
+      </div>
+      <!--/ Abstract. -->
+
+      <!-- Paper video. -->
+      <!-- <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Video</h2>
+          <div class="publication-video">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/470hul75bSM?si=7F9NL8zWbU9GtqHb"
+              title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; 
+           encrypted-media; " allowfullscreen></iframe>
+           
+          </div>
+        </div>
+      </div> -->
+    </div>
+  </section>
+
+
+
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <!-- Concurrent Work. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">Method</h2>
+          <div class="content has-text-justified">
+            <img src="./static/images/frame.jpg">
+            
+          <p class="section-frame"> 
+              Given an AIGI and its corresponding prompt, our objective is to predict both its perception quality and alignment quality scores. 
+              ACL-IQA comprises three main components: <b>Multimodal Inputs</b>,  <b>Text and Image Encoders</b>, and <b>Learning Objectives</b>. Initially, the input AIGI is segmented and resized into multiple patches to effectively capture both local and global information. 
+              Additionally, we craft four text templates to instruct the learning (collaborative and adversarial) strategy and quality (perception and alignment) prediction tasks. For the image encoding phase, we introduce a Dual-Gated MoE block, 
+              extracting distinct image components tailored for the adversarial and collaborative learning, respectively. This differentiation is achieved through guidance derived from the learning instruction texts. Regarding the learning objectives, 
+              we simultaneously predict both perception and alignment quality scores in the collaborative learning, while a Gradient Reversal Layer (GRL) is utilized to disentangle the intertwined features during adversarial learning. 
+              The final prediction is obtained by synthesizing the dual learning paths, combining insights from both collaborative and adversarial processes.
+            </p>
+              
+              
+
+          </div>
+        </div>
+      </div>
+      <!--/ Concurrent Work. -->
+
+    </div>
+  </section>
+
+
+
+<section class="section">
+  <div class="container is-fullhd"> <!-- 使用更宽的容器 -->
+    <div class="has-text-centered">
+      <h2 class="title is-3">Result</h2>
+      
+      <!-- 第一组：上方图片 -->
+      <div class="columns is-centered">
+        <div class="column is-three-quarters"> <!-- 改为 is-full 全宽 -->
+          
+          <div class="box" style="padding: 2rem; border: 1px solid #e0e0e0; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+            <figure class="image">
+              <img 
+                src="./static/images/tab1.png" 
+                alt="Performance comparison of perception and alignment quality prediction on the AGIQA-3K dataset" 
+                style="width: 100%; height: auto;"
+              >
+            </figure>
+            <div class="content has-text-justified" style="margin-top: 1rem; padding: 0 1rem;">
+              <p style="font-size: 0.95rem; color: #4a4a4a; line-height: 1.6;">
+                <strong>Performance comparison of perception and alignment quality prediction on the AGIQA-3K dataset.</strong> The best two results in each column are highlighted in boldface.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 第二组：下方图片 -->
+      <div class="columns is-centered" style="margin-top: 2rem;">
+        <div class="column is-three-quarters"> <!-- 改为 is-full 全宽 -->
+          <div class="box" style="padding: 2rem; border: 1px solid #e0e0e0; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+            <figure class="image">
+              <img 
+                src="./static/images/tab2.png" 
+                alt="Performance comparison of perception, authenticity, and alignment quality prediction on the AIGCIQA2023 dataset" 
+                style="width: 100%; height: auto;"
+              >
+            </figure>
+            <div class="content has-text-justified" style="margin-top: 1rem; padding: 0 1rem;">
+              <p style="font-size: 0.95rem; color: #4a4a4a; line-height: 1.6;">
+                <strong>Performance comparison of perception, authenticity, and alignment quality prediction on the AIGCIQA2023 dataset.</strong> The best two results in each column are highlighted in boldface.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 第三组：下方图片 -->
+      <div class="columns is-centered" style="margin-top: 2rem;">
+        <div class="column is-three-quarters"> <!-- 改为 is-full 全宽 -->
+          <div class="box" style="padding: 2rem; border: 1px solid #e0e0e0; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+            <figure class="image">
+              <img 
+                src="./static/images/tab3.png" 
+                alt="Cross-dataset prediction performance comparison" 
+                style="width: 100%; height: auto;"
+              >
+            </figure>
+            <div class="content has-text-justified" style="margin-top: 1rem; padding: 0 1rem;">
+              <p style="font-size: 0.95rem; color: #4a4a4a; line-height: 1.6;">
+                <strong>Cross-dataset prediction performance comparison.</strong> The best two results in each column are highlighted in boldface.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  /* 悬停效果 */
+  .box:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12) !important;
+    transition: box-shadow 0.3s ease;
+  }
+
+  /* 响应式调整 */
+  @media (max-width: 768px) {
+    .box {
+      padding: 1rem !important;
+    }
+    .content p {
+      font-size: 0.9rem !important;
+    }
+  }
+</style>
+
+
+
+<section class="section">
+  <div class="container is-fullhd"> <!-- 使用更宽的容器 -->
+    <div class="has-text-centered">
+      <h2 class="title is-3">Qualitative Visualization</h2>
+      
+      <!-- 第一组：上方图片 -->
+      <div class="columns is-centered">
+        <div class="column is-three-quarters"> <!-- 改为 is-full 全宽 -->
+          
+          <div class="box" style="padding: 2rem; border: 1px solid #e0e0e0; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+            <figure class="image">
+              <img 
+                src="./static/images/vis_feamap.png" 
+                alt="Attention visualization of features from the MoE layer" 
+                style="width: 100%; height: auto;"
+              >
+            </figure>
+            <div class="content has-text-justified" style="margin-top: 1rem; padding: 0 1rem;">
+              <p style="font-size: 0.95rem; color: #4a4a4a; line-height: 1.6;">
+                <strong>Attention visualization of features from the MoE layer.</strong> The first and second rows correspond to the perceptual quality and alignment prediction tasks, respectively. 
+``Adversarial" and ``Collaborative" indicate that the features are learned from the two distinct interaction paths.
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 第二组：下方图片 -->
+      <div class="columns is-centered" style="margin-top: 2rem;">
+        <div class="column is-four-fifths"> <!-- 保持 3/4 宽度 -->
+          <div class="box" style="padding: 2rem; border: 1px solid #e0e0e0; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+            <figure class="image" style="width: 100%; height: 100%; overflow: hidden;">
+              <img 
+                src="./static/images/effect.png" 
+                alt="Performance comparison under extreme scenarios" 
+                style="width: 100%; height: 100%; object-fit: cover;" 
+              >
+            </figure>
+            <div class="content has-text-justified" style="margin-top: 1rem; padding: 0 1rem;">
+              <p style="font-size: 0.95rem; color: #4a4a4a; line-height: 1.6;">
+                <strong>Performance comparison under extreme scenarios,</strong> collaborative scenarios (left) where perception quality and alignment quality are positively correlated, and adversarial scenarios (right) where they conflict. Each row displays five generated images alongside their respective prompts. The bottom charts present quantitative comparisons across multiple image sets with perception and alignment quality score.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- 第三组：下方图片 -->
+      <div class="columns is-centered" style="margin-top: 2rem;">
+        <div class="column is-three-quarters"> <!-- 改为 is-full 全宽 -->
+          <div class="box" style="padding: 2rem; border: 1px solid #e0e0e0; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+            <figure class="image">
+              <img 
+                src="./static/images/gmad.jpg" 
+                alt="gMAD comparison" 
+                style="width: 100%; height: auto;"
+              >
+            </figure>
+            <div class="content has-text-justified" style="margin-top: 1rem; padding: 0 1rem;">
+              <p style="font-size: 0.95rem; color: #4a4a4a; line-height: 1.6;">
+                <strong>gMAD comparison</strong> between ACL-IQA and IPCE on perception (top) and alignment (bottom) quality. (a) IPCE predicts both images as low quality, (b) IPCE predicts both images as high quality, (c) both images have low MOS, and (d) both images have high MOS. ACL-IQA aligns more consistently with human judgments across all cases.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  /* 悬停效果 */
+  .box:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12) !important;
+    transition: box-shadow 0.3s ease;
+  }
+
+  /* 响应式调整 */
+  @media (max-width: 768px) {
+    .box {
+      padding: 1rem !important;
+    }
+    .content p {
+      font-size: 0.9rem !important;
+    }
+  }
+</style>
+  
+        <!-- 可选：添加第二组对比（保持风格一致） -->
+        <!-- <div class="columns is-centered gap-6 mt-8">
+          <div class="column is-half max-w-md">
+            <div class="card shadow-lg rounded-xl overflow-hidden hover:shadow-xl transition-shadow duration-300">
+              <div class="card-image">
+                <img src="./static/images/1.jpg" alt="Input" class="image is-fullwidth object-cover" style="height: 300px; object-fit: contain; background: #f8f9fa;">
+              </div>
+              <div class="card-footer bg-white justify-center py-3">
+                <p class="card-footer-item has-text-weight-semibold text-gray-700">Input</p>
+              </div>
+            </div>
+          </div>
+          <div class="column is-half max-w-md">
+            <div class="card shadow-lg rounded-xl overflow-hidden hover:shadow-xl transition-shadow duration-300">
+              <div class="card-image">
+                <img src="./static/images/1 (1).jpg" alt="Ours" class="image is-fullwidth object-cover" style="height: 300px; object-fit: contain; background: #f8f9fa;">
+              </div>
+              <div class="card-footer bg-white justify-center py-3">
+                <p class="card-footer-item has-text-weight-semibold text-gray-700">Ours</p>
+              </div>
+            </div>
+          </div>
+        </div> -->
+      </div>
+    </div>
+  </section>
+  
+  <!-- 可选：添加自定义样式（若需调整颜色/间距） -->
+  <style>
+    /* 图片卡片悬停效果增强 */
+    .card:hover {
+      transform: translateY(-4px);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    /* 统一文字颜色和字体 */
+    .card-footer-item {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 1rem;
+    }
+    /* 响应式调整：移动端图片高度自适应 */
+    @media (max-width: 768px) {
+      .card-image img {
+        height: auto !important;
+      }
+      .columns.gap-6 {
+        gap: 3rem !important;
+      }
+    }
+  </style>
+
+  </script>
+
+  <!-- 
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Related Links</h2>
+
+        <div class="content has-text-justified">
+          <p>
+            Needs update
+          </p>
+         
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section> -->
+
+  
+<!-- <section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{liao2025beyond,
+      title={Beyond Cosine Similarity Magnitude-Aware CLIP for No-Reference Image Quality Assessment},
+      author={Liao, Zhicheng and Wu, Dongxu and Shi, Zhenshan and Mai, Sijie and Zhu, Hanwei and Zhu, Lingyu and Jiang, Yuncheng and Chen, Baoliang},
+      journal={arXiv preprint arXiv:2511.09948},
+      year={2025}
+    }</code></pre>
+  </div>
+</section> -->
+
+  <!-- TODO: update the arxiv link and github -->
+  <footer class="footer">
+    <div class="container">
+      <div class="content has-text-centered">
+        <a class="icon-link" href="">
+          <i class="fas fa-file-pdf"></i>
+        </a>
+        <a class="icon-link" href="" class="external-link" disabled>
+          <i class="fab fa-github"></i>
+        </a>
+      </div>
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+            <p>
+              We thank the authors of <a href="https://nerfies.github.io/">Nerfies</a> that kindly open sourced the template of this website.
+              <!-- This website is licensed under a <a rel="license"
+                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+                Commons Attribution-ShareAlike 4.0 International License</a>. -->
+            </p>
+            <p>
+              <!-- This means you are free to borrow the <a href="https://github.com/nerfies/nerfies.github.io">source
+                code</a> of this website,
+              we just ask that you link back to this page in the footer.
+              Please remember to remove the analytics code included in the header of the website which
+              you do not want on your website. -->
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>
