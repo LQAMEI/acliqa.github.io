@@ -168,15 +168,15 @@ Mixture-of-Experts.">
             <p class="section-intro">
             Over the past decades, numerous IQA models have been developed to handle common degradations like noise or blur. 
             However, these methods are inherently limited when confronted with the unique distortions introduced by modern generative models, 
-            distortions that are semantic rather than photometric. Moreover, since they typically ignore textual information, 
-            they cannot properly evaluate prompt alignment. To address these limitations, a new wave of AIGIQA-specific methods has emerged, 
-            such as TIER and IPCE, which leverage dual encoders and CLIP to capture image-text alignment. 
+            distortions that are semantic rather than photometric. Moreover, since they typically operate solely on visual inputs, 
+            they cannot directly evaluate prompt alignment. To address these limitations, a new wave of AIGIQA-specific methods has emerged, 
+            For example, TIER employs dual encoders for image and text to jointly model their correspondence, while IPCE leverages CLIP to capture broader image-text alignment.
             Yet, despite these promising efforts, one crucial aspect remains underexplored: the intrinsic interaction between perceptual 
-            and alignment quality. Existing approaches usually treat them as independent tasks, overlooking the subtle ways in which 
-            they influence each other during human judgment. As illustrated in Fig. 1, this interaction can be either <i>collaborative</i> 
-            or <i>adversarial</i>. In some cases (Fig. 1(a)-(b)), prompts containing quality-related words cause the two assessments to 
-            reinforce each other, where high-quality visuals tend to be perceived as better aligned, and vice versa. In other cases 
-            (Fig. 1(c)-(d)), the two aspects behave independently or even conflict, suggesting that they should be disentangled.
+            and alignment quality. Existing approaches usually treat them as independent tasks, overlooking the subtle ways in which they influence each other during human judgment. 
+            As illustrated in Fig. 1, this interaction can be either <i>collaborative</i> 
+            or <i>adversarial</i>.  For instance, in cases such as I1-I3 and I4-I6, prompts containing quality-related words cause the two assessments to 
+            reinforce each other, where high-quality visuals tend to be perceived as better aligned, and vice versa. In other cases such as I7-I9 and I10-I12, 
+            the two aspects behave independently or even conflict, suggesting that they should be disentangled.
         </p>
 
         <div class="question">
